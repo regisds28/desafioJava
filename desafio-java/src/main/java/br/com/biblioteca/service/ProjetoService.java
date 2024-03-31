@@ -1,6 +1,6 @@
 package br.com.biblioteca.service;
 
-import br.com.biblioteca.ProjetoRepository;
+import br.com.biblioteca.repository.ProjetoRepository;
 import br.com.biblioteca.enums.RiscoEnum;
 import br.com.biblioteca.enums.StatusEnum;
 import br.com.biblioteca.model.Projeto;

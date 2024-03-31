@@ -2,7 +2,7 @@ package br.com.biblioteca.service.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import br.com.biblioteca.ProjetoRepository;
+import br.com.biblioteca.repository.ProjetoRepository;
 import br.com.biblioteca.model.Projeto;
 import br.com.biblioteca.service.ProjetoService;
 import org.junit.jupiter.api.Test;

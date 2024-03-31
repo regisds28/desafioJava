@@ -13,19 +13,17 @@ public class ProjetoDTO {
 
     @NotNull
     private String nome;
-
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataInicio;
-
+    private String gerente;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate dataPrevisaoFim;
-
+    private LocalDate previsaoTermino;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate dataFim;
-
-    private StatusEnum status;
-    private Float orcamentoTotal;
+    private LocalDate dataRealTermino;
+    private float orcamento;
     private String descricao;
+    private RiscoEnum risco;
+    private StatusEnum status;
 
 
 }

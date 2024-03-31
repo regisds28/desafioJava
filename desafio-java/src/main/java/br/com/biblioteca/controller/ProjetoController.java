@@ -1,7 +1,9 @@
 package br.com.biblioteca.controller;
 
+import br.com.biblioteca.dto.ProjetoDTO;
 import br.com.biblioteca.model.Projeto;
 import br.com.biblioteca.service.ProjetoService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +31,11 @@ public class ProjetoController {
     }
 
     @PostMapping("/salvarProjeto")
-    public String salvarProjeto(@Valid @ModelAttribute("novoProjeto") Projeto projeto) {
+    public String salvarProjeto(@Valid @ModelAttribute("novoProjeto") ProjetoDTO projetoDto) {
+        Projeto projeto = new Projeto();
+        BeanUtils.copyProperties(projetoDto, projeto);
         service.salvar(projeto);
-        return "/cadastrarProjeto";
+        return "/listarProjetos";
     }
 
     @GetMapping("/{id}")
@@ -48,13 +52,16 @@ public class ProjetoController {
     }
 
     @PostMapping("/{id}")
-    public String alterarProjeto(@PathVariable("id") Long id, @ModelAttribute("objetoProjeto") @Valid Projeto projeto, BindingResult error) {
+    public String alterarProjeto(@PathVariable("id") Long id, @ModelAttribute("objetoProjeto") @Valid ProjetoDTO projetoDto, BindingResult error) {
+
+        Projeto projeto = new Projeto();
 
         if(error.hasErrors()){
             projeto.setId(id);
             return "/editarProjeto";
         }
 
+        BeanUtils.copyProperties(projetoDto, projeto);
         service.alterar(projeto);
         return "/listarProjetos";
     }

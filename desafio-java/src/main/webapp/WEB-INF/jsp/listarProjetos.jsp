@@ -81,7 +81,7 @@
                   <button disabled type="button" class="btn btn-danger"><i class="bi bi-trash-alt"></i>Excluir</button>
                 </c:when>
                 <c:when test="${projeto.status.name != 'Cancelado' || projeto.status.name != 'Em andamento' || projeto.status.name != 'Encerrado'}">
-                  <a href="/projetos/${projeto.id}" type="button" class="btn btn-danger">Excluir</a>
+                  <a href="/projetos/apagar/${projeto.id}" type="button" class="btn btn-danger">Excluir</a>
                 </c:when>
                 <c:otherwise></c:otherwise>
               </c:choose>

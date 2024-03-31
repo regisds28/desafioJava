@@ -29,7 +29,6 @@
         <div class="card-body">
             <h5 class="card-title">Cadastrar Projeto</h5>
             <form:form action="salvarProjeto" method="post" modelAttribute="novoProjeto">
-                <form:hidden path="id"/>
                 <div class="row">
                     <div class="col">
                         <form:label path="nome">Nome</form:label>
@@ -71,10 +70,6 @@
                 </div>
             </form:form>
         </div>
-    </div>
-    <div class="alert alert-success alert-dismissible fade show">
-        <strong>Success!</strong> Your message has been sent successfully.
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 
 </div>
