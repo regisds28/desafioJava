@@ -51,29 +51,19 @@ public class ProjetoService {
         return repository.save(projeto);
     }
 
-    public ResponseEntity<Object> deleteProjetoId(long clienteId) {
-
-        repository.deleteById(clienteId);
-
-        return ResponseEntity.ok().build();
-
+    public Projeto buscarProjetoPorId(Long id) throws Exception {
+        Optional<Projeto> opt = repository.findById(id);
+        if (opt.isPresent()) {
+            return opt.get();
+        } else {
+            throw new Exception("Projeto com id : " + id + " não existe");
+        }
     }
 
-    public List<Projeto> filtraPor(Projeto filtro) {
-        ExampleMatcher matcher = ExampleMatcher
-                .matching()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        Example<Projeto> exemplo = Example.of(filtro, matcher);
-
-        return repository.findAll(exemplo);
-    }
-
-    public Projeto getProjeto(Long id) {
-        return repository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
+    public void deleteProjetoId(Long id) throws Exception {
+        Projeto projeto = buscarProjetoPorId(id);
+        repository.delete(projeto);
     }
 
     public Projeto alterar(Projeto projeto) {

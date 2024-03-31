@@ -75,13 +75,13 @@
             <td>${projeto.descricao}</td>
             <td>${projeto.status.name}</td>
             <td>
-              <a href="/projetos/${projeto.id}" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Editar</a>
+              <a href="/projetos/${projeto.id}" class="btn btn-primary">Editar</a>
               <c:choose>
                 <c:when test="${projeto.status.name == 'Cancelado' || projeto.status.name == 'Em andamento' || projeto.status.name == 'Encerrado'}">
                   <button disabled type="button" class="btn btn-danger"><i class="bi bi-trash-alt"></i>Excluir</button>
                 </c:when>
                 <c:when test="${projeto.status.name != 'Cancelado' || projeto.status.name != 'Em andamento' || projeto.status.name != 'Encerrado'}">
-                  <button type="button" class="btn btn-danger"><i class="bi bi-trash-alt"></i>Excluir</button>
+                  <a href="/projetos/${projeto.id}" type="button" class="btn btn-danger">Excluir</a>
                 </c:when>
                 <c:otherwise></c:otherwise>
               </c:choose>

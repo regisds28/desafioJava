@@ -52,4 +52,14 @@ public class ProjetoController {
         service.alterar(projeto);
         return "/listarProjetos";
     }
+    @GetMapping("/apagar/{id}")
+    public String apagarProjeto(@PathVariable("id") long id) {
+        try {
+            service.deleteProjetoId(id);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return "/listarProjetos";
+    }
+
 }
