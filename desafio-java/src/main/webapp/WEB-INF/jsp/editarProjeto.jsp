@@ -29,7 +29,6 @@
   <div class="card-body">
     <h5 class="card-title">Editar Projeto</h5>
     <form:form action="alterarProjeto" method="post" modelAttribute="objetoProjeto">
-      <form:hidden path="id"/>
       <div class="row">
         <div class="col">
           <form:label path="nome">Nome</form:label>

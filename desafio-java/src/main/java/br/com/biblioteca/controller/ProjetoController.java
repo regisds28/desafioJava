@@ -35,10 +35,16 @@ public class ProjetoController {
     }
 
     @GetMapping("/{id}")
-    public String listarProjetoById(@Valid @PathVariable Long id, Model model) throws Exception {
-        Projeto projeto = service.getProjetoById(id);
-        model.addAttribute("objetoProjeto", projeto);
-        return "/editarProjeto";
+    public String editarProjeto(@PathVariable("id") Long id, Model model) {
+
+        try {
+            Projeto projeto = service.buscarProjetoPorId(id);
+            model.addAttribute("objetoProjeto", projeto);
+            return "/editarProjeto";
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return "/listarProjetos";
     }
 
     @PostMapping("/{id}")
@@ -52,6 +58,7 @@ public class ProjetoController {
         service.alterar(projeto);
         return "/listarProjetos";
     }
+
     @GetMapping("/apagar/{id}")
     public String apagarProjeto(@PathVariable("id") long id) {
         try {

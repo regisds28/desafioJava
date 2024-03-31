@@ -1,20 +1,11 @@
 package br.com.biblioteca.service;
 
 import br.com.biblioteca.ProjetoRepository;
-import br.com.biblioteca.dto.ProjetoDTO;
 import br.com.biblioteca.enums.RiscoEnum;
 import br.com.biblioteca.enums.StatusEnum;
-import br.com.biblioteca.enums.ValidationEnum;
 import br.com.biblioteca.model.Projeto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResource;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
