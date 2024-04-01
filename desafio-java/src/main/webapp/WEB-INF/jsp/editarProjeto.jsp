@@ -28,7 +28,7 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Editar Projeto</h5>
-    <form:form action="alterarProjeto" method="post" modelAttribute="objetoProjeto">
+    <form:form method="post" modelAttribute="objetoProjeto">
       <div class="row">
         <form:hidden path="id"/>
         <div class="col">
@@ -40,18 +40,21 @@
           <form:input type="date" class="form-control" required="required" path="dataInicio"/>
         </div>
         <div class="col">
-          <form:label path="previsaoTermino">Previsão de término</form:label>
-          <form:input type="date" class="form-control" required="required" path="previsaoTermino"/>
+          <form:label path="dataPrevisaoFim">Previsão de término</form:label>
+          <form:input type="date" class="form-control" required="required" path="dataPrevisaoFim"/>
         </div>
         <div class="col">
-          <form:label path="dataRealTermino">Data real de término</form:label>
-          <form:input type="date" class="form-control" required="required" path="dataRealTermino"/>
+          <form:label path="dataFim">Data real de término</form:label>
+          <form:input type="date" class="form-control" required="required" path="dataFim"/>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <form:label path="gerente">Gerente responsável</form:label>
-          <form:input type="text" path="gerente" required="required" class="form-control"/>
+          <form:label path="id">Gerente responsável</form:label>
+          <form:select class="form-select" path="idGerente" required="required">
+            <form:option value="" label="Selecionar"/>
+            <form:options items="${listaMembros}" itemValue="id" itemLabel="nome"/>
+          </form:select>
         </div>
         <div class="col">
           <form:label path="orcamento">Orçamento total</form:label>
@@ -66,8 +69,8 @@
       </div>
       <br>
       <div class="row">
-        <button class="btn btn-primary" type="submit">Alterar</button>
-        <a class="btn btn-secondary" href="/projetos/listarProjetos" type="submit">Voltar</a>
+        <button class="btn btn-primary" onclick="confirmarEdicao()">Alterar</button>
+        <a class="btn btn-secondary" href="/projetos/listarProjetos">Voltar</a>
       </div>
     </form:form>
   </div>
@@ -79,4 +82,15 @@
 </body>
 
 <script src="<c:url value="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"/>"></script>
+<script>
+  function confirmarEdicao (f){
+
+    var confirma =alert("Projeto alterado com sucesso!");
+    if (confirma==true){
+      f.action= '/projetos/listarProjetos'
+      window.location.href="/projetos/listarProjetos";
+    }
+    f.submit;
+  }
+</script>
 </html>

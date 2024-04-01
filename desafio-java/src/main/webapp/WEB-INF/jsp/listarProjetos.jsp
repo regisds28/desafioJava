@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://example.com/functions" prefix="f" %>
 <!DOCTYPE html>
 <html lang="pt_br">
 <head>
@@ -66,11 +68,11 @@
           <tr>
             <td>${projeto.nome}</td>
             <td>
-                ${projeto.dataInicio}
+                ${f:formatLocalDateTime(projeto.dataInicio, 'dd/MM/yyyy')}
             </td>
-            <td>${projeto.previsaoTermino}</td>
-            <td>${projeto.dataRealTermino}</td>
-            <td>${projeto.gerente}</td>
+            <td>${f:formatLocalDateTime(projeto.dataPrevisaoFim, 'dd/MM/yyyy')}</td>
+            <td>${f:formatLocalDateTime(projeto.dataFim, 'dd/MM/yyyy')}</td>
+            <td>${projeto.gerente.nome}</td>
             <td>${projeto.orcamento}</td>
             <td>${projeto.descricao}</td>
             <td>${projeto.status.name}</td>

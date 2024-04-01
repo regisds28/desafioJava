@@ -15,15 +15,15 @@ public class ProjetoDTO {
     private String nome;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataInicio;
-    private String gerente;
+    private PessoaDTO gerente;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate previsaoTermino;
+    private LocalDate dataPrevisaoFim;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate dataRealTermino;
+    private LocalDate dataFim;
     private float orcamento;
     private String descricao;
     private RiscoEnum risco;
     private StatusEnum status;
-
-
+    @NotNull
+    private Long idGerente;
 }

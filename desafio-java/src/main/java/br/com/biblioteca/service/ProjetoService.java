@@ -1,5 +1,7 @@
 package br.com.biblioteca.service;
 
+import br.com.biblioteca.model.Pessoa;
+import br.com.biblioteca.repository.PessoaRepository;
 import br.com.biblioteca.repository.ProjetoRepository;
 import br.com.biblioteca.enums.RiscoEnum;
 import br.com.biblioteca.enums.StatusEnum;
@@ -15,8 +17,16 @@ public class ProjetoService {
     @Autowired
     private ProjetoRepository repository;
 
+    @Autowired
+    private PessoaRepository membroRepository;
+
     public List<Projeto> listarProjetos() {
         List<Projeto> list = repository.findAll();
+        return list;
+    }
+
+    public List<Pessoa> listarMembros() {
+        List<Pessoa> list = membroRepository.findAll();
         return list;
     }
 
@@ -37,7 +47,7 @@ public class ProjetoService {
     }
 
     public Projeto salvar(Projeto projeto) {
-        projeto.setStatus(StatusEnum.EM_ANALISE);
+        projeto.setStatus(StatusEnum.CANCELADO);
         projeto.setRisco(RiscoEnum.ALTO);
         return repository.save(projeto);
     }

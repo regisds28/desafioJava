@@ -39,23 +39,32 @@
                         <form:input type="date" class="form-control" required="required" path="dataInicio"/>
                     </div>
                     <div class="col">
-                        <form:label path="previsaoTermino">Previsão de término</form:label>
-                        <form:input type="date" class="form-control" required="required" path="previsaoTermino"/>
+                        <form:label path="dataPrevisaoFim">Previsão de término</form:label>
+                        <form:input type="date" class="form-control" required="required" path="dataPrevisaoFim"/>
                     </div>
                     <div class="col">
-                        <form:label path="dataRealTermino">Data real de término</form:label>
-                        <form:input type="date" class="form-control" required="required" path="dataRealTermino"/>
+                        <form:label path="dataFim">Data real de término</form:label>
+                        <form:input type="date" class="form-control" required="required" path="dataFim"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <form:label path="gerente">Gerente responsável</form:label>
-                        <form:input type="text" path="gerente" required="required" class="form-control"/>
+                        <form:label path="id">Gerente responsável</form:label>
+                        <form:select class="form-select" path="idGerente" required="required">
+                            <form:option value="" label="Selecionar"/>
+                            <form:options items="${listaMembros}" itemValue="id" itemLabel="nome"/>
+                        </form:select>
                     </div>
                     <div class="col">
                         <form:label path="orcamento">Orçamento total</form:label>
                         <form:input type="text" class="form-control" required="required" path="orcamento"/>
                     </div>
+<%--                    <div class="col">--%>
+<%--                        <form:label path="gerente">Membro</form:label>--%>
+<%--                        <br>--%>
+<%--                        Gerente <form:radiobutton path="gerente" value="gerente"/>--%>
+<%--                        Funcionário <form:radiobutton path="gerente" value="funcionario"/>--%>
+<%--                    </div>--%>
                 </div>
                 <div class="row">
                     <div class="col">

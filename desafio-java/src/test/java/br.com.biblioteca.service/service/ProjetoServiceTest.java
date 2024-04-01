@@ -31,9 +31,9 @@ public class ProjetoServiceTest {
         assertEquals(254871,254871, String.valueOf(projeto.getOrcamento()));
         assertEquals("Projeto desafio Java", projeto.getDescricao());
         assertEquals("novo gerente", projeto.getGerente());
-        assertEquals("2024-03-30", String.valueOf(projeto.getDataRealTermino()));
+        assertEquals("2024-03-30", String.valueOf(projeto.getDataFim()));
         assertEquals("2024-03-01", String.valueOf(projeto.getDataInicio()));
-        assertEquals("2024-03-30", String.valueOf(projeto.getPrevisaoTermino()));
+        assertEquals("2024-03-30", String.valueOf(projeto.getDataPrevisaoFim()));
         assertEquals(2, 2, String.valueOf(projeto.getRisco()));
         assertEquals(2, 2, String.valueOf(projeto.getStatus()));
     }
