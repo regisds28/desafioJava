@@ -38,7 +38,7 @@ public class ProjetoController {
         return "/listarProjetos";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/editar/{id}")
     public String editarProjeto(@PathVariable("id") Long id, Model model) {
 
         try {
@@ -51,7 +51,7 @@ public class ProjetoController {
         return "/listarProjetos";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/editar/{id}")
     public String alterarProjeto(@PathVariable("id") Long id, @ModelAttribute("objetoProjeto") @Valid ProjetoDTO projetoDto, BindingResult error) {
 
         Projeto projeto = new Projeto();

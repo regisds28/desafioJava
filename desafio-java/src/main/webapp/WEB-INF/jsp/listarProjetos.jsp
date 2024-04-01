@@ -75,7 +75,7 @@
             <td>${projeto.descricao}</td>
             <td>${projeto.status.name}</td>
             <td>
-              <a href="/projetos/${projeto.id}" class="btn btn-primary">Editar</a>
+              <a href="/projetos/editar/${projeto.id}" class="btn btn-primary">Editar</a>
               <c:choose>
                 <c:when test="${projeto.status.name == 'Cancelado' || projeto.status.name == 'Em andamento' || projeto.status.name == 'Encerrado'}">
                   <button disabled type="button" class="btn btn-danger"><i class="bi bi-trash-alt"></i>Excluir</button>

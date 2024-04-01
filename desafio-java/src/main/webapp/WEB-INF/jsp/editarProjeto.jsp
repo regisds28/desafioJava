@@ -30,6 +30,7 @@
     <h5 class="card-title">Editar Projeto</h5>
     <form:form action="alterarProjeto" method="post" modelAttribute="objetoProjeto">
       <div class="row">
+        <form:hidden path="id"/>
         <div class="col">
           <form:label path="nome">Nome</form:label>
           <form:input type="text" class="form-control" required="required" path="nome"/>

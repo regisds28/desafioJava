@@ -16,9 +16,8 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORT:5432}/${DB_NAME:portifolio}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:admin}
-    initialization-mode: always
+    username: ${DB_USERNAME:username}
+    password: ${DB_PASSWORD:password}
     connectionTestQuery: 'SELECT 1'
 
   jpa:
@@ -28,6 +27,9 @@ spring:
     hibernate:
       ddl-auto: update
     generate-ddl: true
+  sql:
+    init:
+      mode: always
 
 
 logging:
