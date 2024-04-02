@@ -16,7 +16,7 @@ import java.util.Optional;
 @SpringBootTest
 @WebAppConfiguration
 @Sql(scripts = "/sql/insert_projeto_buscar_id_test.sql")
-public class ProjetoServiceTest {
+class ProjetoServiceTest {
     @Autowired
     private ProjetoService projetoService;
 
@@ -24,13 +24,13 @@ public class ProjetoServiceTest {
     private ProjetoRepository repository;
 
     @Test
-    public void getProjetoByIdTest() throws Exception {
-        Projeto projeto = projetoService.getProjetoById(14L);
+    void getProjetoByIdTest() throws Exception {
+        Projeto projeto = projetoService.getProjetoById(103L);
 
         assertEquals("Primeiro projeto", projeto.getNome());
         assertEquals(254871,254871, String.valueOf(projeto.getOrcamento()));
         assertEquals("Projeto desafio Java", projeto.getDescricao());
-        assertEquals("novo gerente", projeto.getGerente());
+        assertEquals(92, projeto.getIdGerente());
         assertEquals("2024-03-30", String.valueOf(projeto.getDataFim()));
         assertEquals("2024-03-01", String.valueOf(projeto.getDataInicio()));
         assertEquals("2024-03-30", String.valueOf(projeto.getDataPrevisaoFim()));
@@ -39,8 +39,8 @@ public class ProjetoServiceTest {
     }
 
     @Test
-    public void deleteProjetoIdTest() throws Exception{
-        projetoService.deleteProjetoId(14L);
+    void deleteProjetoIdTest() throws Exception{
+        projetoService.deleteProjetoId(103L);
 
         Optional<Projeto> optionalProjeto = repository.findById(14L);
 

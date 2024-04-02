@@ -1,6 +1,8 @@
 package br.com.biblioteca.controller;
 
 import br.com.biblioteca.dto.ProjetoDTO;
+import br.com.biblioteca.enums.RiscoEnum;
+import br.com.biblioteca.enums.StatusEnum;
 import br.com.biblioteca.model.Pessoa;
 import br.com.biblioteca.model.Projeto;
 import br.com.biblioteca.service.ProjetoService;
@@ -19,6 +21,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/projetos")
 public class ProjetoController {
+
+    public static final String LISTA_MEMBROS = "listaMembros";
+    public static final String FWD_LISTA = "redirect:/projetos/listarProjetos";
+
     @Autowired
     private ProjetoService service;
 
@@ -31,14 +37,16 @@ public class ProjetoController {
     @GetMapping(value = "/membros", produces = "application/json")
     public ResponseEntity<List<Pessoa>> listaMembros(Model model){
         List<Pessoa> list = service.listarMembros();
-        model.addAttribute("listaMembros", list);
-        return new ResponseEntity<List<Pessoa>>(list, HttpStatus.OK);
+        model.addAttribute(LISTA_MEMBROS, list);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/cadastrarProjeto")
     public String cadastrarProjeto(Model model) {
         model.addAttribute("novoProjeto", new Projeto());
-        model.addAttribute("listaMembros", service.listarMembros());
+        model.addAttribute(LISTA_MEMBROS, service.listarMembros());
+        model.addAttribute("status", StatusEnum.values());
+        model.addAttribute("risco", RiscoEnum.values());
         return "/cadastrarProjeto";
     }
 
@@ -47,7 +55,7 @@ public class ProjetoController {
         Projeto projeto = new Projeto();
         BeanUtils.copyProperties(projetoDto, projeto);
         service.salvar(projeto);
-        return "/listarProjetos";
+        return FWD_LISTA;
     }
 
     @GetMapping("/editar/{id}")
@@ -56,12 +64,12 @@ public class ProjetoController {
         try {
             Projeto projeto = service.buscarProjetoPorId(id);
             model.addAttribute("objetoProjeto", projeto);
-            model.addAttribute("listaMembros", service.listarMembros());
+            model.addAttribute(LISTA_MEMBROS, service.listarMembros());
             return "/editarProjeto";
         } catch (Exception e) {
             e.getMessage();
         }
-        return "/listarProjetos";
+        return FWD_LISTA;
     }
 
     @PostMapping("/editar/{id}")
@@ -76,7 +84,7 @@ public class ProjetoController {
 
         BeanUtils.copyProperties(projetoDto, projeto);
         service.alterar(projeto);
-        return "/listarProjetos";
+        return FWD_LISTA;
     }
 
     @GetMapping("/apagar/{id}")
@@ -86,7 +94,7 @@ public class ProjetoController {
         } catch (Exception e) {
             e.getMessage();
         }
-        return "/listarProjetos";
+        return FWD_LISTA;
     }
 
 }

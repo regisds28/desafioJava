@@ -1,5 +1,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Desafio Java - cadastrar projeto</title>
+
+  <link href="<c:url value="/static/node_modules/bootstrap/dist/css/bootstrap.min.css"/>" rel="stylesheet">
+  <link href="<c:url value="/static/main.css"/>" rel="stylesheet">
+
+</head>
+<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Potifólio de Projetos</a>
@@ -19,3 +33,5 @@
     </div>
   </div>
 </nav>
+</body>
+</html>

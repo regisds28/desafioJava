@@ -12,12 +12,14 @@ spring:
     view:
       prefix: '/WEB-INF/jsp/'
       suffix: '.jsp'
+    pathmatch:
+      matching-strategy: ant_path_matcher
   main:
     allow-bean-definition-overriding: true
   datasource:
     url: jdbc:postgresql://${DB_URL:localhost}:${DB_PORT:5432}/${DB_NAME:portifolio}
-    username: ${DB_USERNAME:username}
-    password: ${DB_PASSWORD:password}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:admin}
     connectionTestQuery: 'SELECT 1'
 
   jpa:
@@ -30,7 +32,13 @@ spring:
   sql:
     init:
       mode: always
-
+  flyway:
+    enabled: false
+    table: portifolio
+    baseline-on-migrate: true
+    clean-disabled: false
+    clean-on-validation-error: true
+    locations: classpath:db.migration
 
 logging:
   level:

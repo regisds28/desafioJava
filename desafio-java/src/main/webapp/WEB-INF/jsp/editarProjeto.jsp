@@ -1,28 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html lang="pt_br">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Desafio Java - cadastrar projeto</title>
-
-  <link href="<c:url value="/static/node_modules/bootstrap/dist/css/bootstrap.min.css"/>"
-        rel="stylesheet">
-
-  <style>
-    .row button, .row a{
-      width: auto;
-      float: left;
-      margin-left: 10px;
-    }
-  </style>
-
-</head>
-<body>
 
 <%@ include file="/WEB-INF/jsp/components/header.jsp"%>
 <div class="card">
@@ -60,6 +38,20 @@
           <form:label path="orcamento">Orçamento total</form:label>
           <form:input type="text" class="form-control" required="required" path="orcamento"/>
         </div>
+        <div class="col">
+          <form:label path="status">Status</form:label>
+          <form:select class="form-select" path="status" required="required">
+            <form:option value="" label="Selecionar"/>
+            <form:options items="${status}" itemValue="name" itemLabel="label"/>
+          </form:select>
+        </div>
+        <div class="col">
+          <form:label path="risco">Risco</form:label>
+          <form:select class="form-select" path="risco" required="required">
+            <form:option value="" label="Selecionar"/>
+            <form:options items="${risco}" itemValue="name" itemLabel="label"/>
+          </form:select>
+        </div>
       </div>
       <div class="row">
         <div class="col">
@@ -77,20 +69,4 @@
 </div>
 
 </div>
-
-
-</body>
-
-<script src="<c:url value="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"/>"></script>
-<script>
-  function confirmarEdicao (f){
-
-    var confirma =alert("Projeto alterado com sucesso!");
-    if (confirma==true){
-      f.action= '/projetos/listarProjetos'
-      window.location.href="/projetos/listarProjetos";
-    }
-    f.submit;
-  }
-</script>
-</html>
+<%@ include file="/WEB-INF/jsp/components/footer.jsp"%>

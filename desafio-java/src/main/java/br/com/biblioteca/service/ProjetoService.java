@@ -47,8 +47,6 @@ public class ProjetoService {
     }
 
     public Projeto salvar(Projeto projeto) {
-        projeto.setStatus(StatusEnum.ANALISE_APROVADA);
-        projeto.setRisco(RiscoEnum.ALTO);
         return repository.save(projeto);
     }
 
@@ -68,6 +66,7 @@ public class ProjetoService {
     }
 
     public Projeto alterar(Projeto projeto) {
+
         return salvar(projeto);
     }
 

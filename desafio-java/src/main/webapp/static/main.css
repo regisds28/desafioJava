@@ -1,0 +1,13 @@
+html{
+    overflow: hidden;
+}
+
+.row button, .row a, .row h4{
+    width: auto;
+    float: left;
+    margin-left: 10px;
+}
+
+.header{
+    margin: 1rem 0;
+}

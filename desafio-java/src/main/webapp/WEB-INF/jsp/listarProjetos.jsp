@@ -3,40 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://example.com/functions" prefix="f" %>
-<!DOCTYPE html>
-<html lang="pt_br">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Desafio Java - Lista de projetos</title>
-
-  <link href="<c:url value="/static/node_modules/bootstrap/dist/css/bootstrap.min.css"/>"
-        rel="stylesheet">
-
-  <style>
-    .header{
-      margin: 10px;
-      width: 100%;
-    }
-    .header h4{
-      float: left;
-    }
-    .header a{
-      margin-left: 16px;
-    }
-    .info{
-      width: 100%;
-      padding: 2rem 10px;
-      height: 100px;
-      background: #eee;
-      vertical-align: top;
-    }
-  </style>
-
-</head>
-<body>
 
 <%@ include file="/WEB-INF/jsp/components/header.jsp"%>
 
@@ -51,10 +17,11 @@
       <table class="table table-bordered">
         <thead>
         <tr>
+          <th scope="col">ID</th>
           <th scope="col">Nome</th>
           <th scope="col">Data de início</th>
-          <th scope="col">Data prevista término</th>
-          <th scope="col">Data real de término</th>
+          <th scope="col">Data de Previsão Fim</th>
+          <th scope="col">Data Fim</th>
           <th scope="col">Gerente responsável</th>
           <th scope="col">Orçamento total</th>
           <th scope="col">Descrição</th>
@@ -66,24 +33,40 @@
         <tbody>
         <c:forEach items="${projetos}" var="projeto">
           <tr>
+            <td>${projeto.id}</td>
             <td>${projeto.nome}</td>
             <td>
                 ${f:formatLocalDateTime(projeto.dataInicio, 'dd/MM/yyyy')}
             </td>
-            <td>${f:formatLocalDateTime(projeto.dataPrevisaoFim, 'dd/MM/yyyy')}</td>
-            <td>${f:formatLocalDateTime(projeto.dataFim, 'dd/MM/yyyy')}</td>
-            <td>${projeto.gerente.nome}</td>
-            <td>${projeto.orcamento}</td>
-            <td>${projeto.descricao}</td>
-            <td>${projeto.status.name}</td>
             <td>
-              <a href="/projetos/editar/${projeto.id}" class="btn btn-primary">Editar</a>
+                ${f:formatLocalDateTime(projeto.dataPrevisaoFim, 'dd/MM/yyyy')}
+            </td>
+            <td>
+                ${f:formatLocalDateTime(projeto.dataFim, 'dd/MM/yyyy')}
+            </td>
+            <td>${projeto.gerente.nome}</td>
+            <fmt:formatNumber value="${projeto.orcamento}"
+                              type="currency"
+                              pattern="#,###.##"
+                              maxFractionDigits="2"
+                              minFractionDigits="2"
+                              groupingUsed="true"
+                              var="orcamento"
+                              scope="request"/>
+            <td>R$ ${orcamento}</td>
+            <td>${projeto.descricao}</td>
+            <td>${projeto.status.label}</td>
+            <td>${projeto.risco.label}</td>
+            <td>
+              <c:set var="linkEditar" value="/projetos/editar/${projeto.id}"/>
+              <a href="${linkEditar}" class="btn btn-primary">Editar</a>
               <c:choose>
-                <c:when test="${projeto.status.name == 'Cancelado' || projeto.status.name == 'Em andamento' || projeto.status.name == 'Encerrado'}">
+                <c:when test="${projeto.status.label == 'Iniciado' || projeto.status.label == 'Em andamento' || projeto.status.label == 'Encerrado'}">
                   <button disabled type="button" class="btn btn-danger"><i class="bi bi-trash-alt"></i>Excluir</button>
                 </c:when>
-                <c:when test="${projeto.status.name != 'Cancelado' || projeto.status.name != 'Em andamento' || projeto.status.name != 'Encerrado'}">
-                  <a href="/projetos/apagar/${projeto.id}" type="button" class="btn btn-danger">Excluir</a>
+                <c:when test="${projeto.status.label != 'Iniciado' || projeto.status.label != 'Em andamento' || projeto.status.label != 'Encerrado'}">
+                  <c:set var="linkExcluir" value="/projetos/apagar/${projeto.id}"/>
+                  <button onClick="linkDelete(${projeto.id});" type="button" class="btn btn-danger">Excluir</button>
                 </c:when>
                 <c:otherwise></c:otherwise>
               </c:choose>
@@ -94,7 +77,4 @@
       </table>
   </div>
 </div>
-
-</body>
-<script src="<c:url value="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"/>"></script>
-</html>
+<%@ include file="/WEB-INF/jsp/components/footer.jsp"%>

@@ -1,19 +1,21 @@
 package br.com.biblioteca.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
 
+@Getter
+@AllArgsConstructor
 public enum RiscoEnum {
     BAIXO("Risco baixo"),
     MEDIO("Risco médio"),
     ALTO("Risco alto");
 
-    private String name;
+    private String label;
 
-    RiscoEnum(String nameStr) {
-        this.name = nameStr;
-    }
     @JsonValue
-    public String getName() {
-        return name;
+    public String toValue() {
+        return label;
     }
 }
