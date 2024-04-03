@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col">
                         <form:label path="descricao">Descrição</form:label>
-                        <form:input type="textarea" path="descricao" class="form-control"/>
+                        <form:input type="textarea" path="descricao" class="form-control" required="required"/>
                     </div>
                 </div>
                 <br>
@@ -68,4 +68,5 @@
     </div>
 
 </div>
+
 <%@ include file="/WEB-INF/jsp/components/footer.jsp"%>

@@ -12,10 +12,14 @@
     <a href="/projetos/cadastrarProjeto" class="btn btn-primary">Cadastrar</a>
   </div>
 
+  <c:if test="${empty projetos}">
+    <p class="noContent">Sem projetos cadastrados</p>
+  </c:if>
 
-  <div class="col-12">
+  <c:if test="${not empty projetos}">
+    <div class="col-12">
       <table class="table table-bordered">
-        <thead>
+      <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Nome</th>
@@ -26,11 +30,12 @@
           <th scope="col">Orçamento total</th>
           <th scope="col">Descrição</th>
           <th scope="col">Status</th>
+          <th scope="col">Risco</th>
           <th scope="col">Ações</th>
 
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
         <c:forEach items="${projetos}" var="projeto">
           <tr>
             <td>${projeto.id}</td>
@@ -65,16 +70,32 @@
                   <button disabled type="button" class="btn btn-danger"><i class="bi bi-trash-alt"></i>Excluir</button>
                 </c:when>
                 <c:when test="${projeto.status.label != 'Iniciado' || projeto.status.label != 'Em andamento' || projeto.status.label != 'Encerrado'}">
-                  <c:set var="linkExcluir" value="/projetos/apagar/${projeto.id}"/>
-                  <button onClick="linkDelete(${projeto.id});" type="button" class="btn btn-danger">Excluir</button>
+                  <button class="btn btn-danger" onclick="javascript:modalConfirm(${projeto.id})" id="btn-confirm-${projeto.id}">Excluir</button>
+                  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal-${projeto.id}">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <p class="modal-title" id="myModalLabel">Tem certeza que deseja excluir o item ${projeto.id}?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <c:set var="linkExcluir" value="/projetos/apagar/${projeto.id}"/>
+                          <a href="${linkExcluir}" onclick="onExcluir()" class="btn btn-danger">Sim</a>
+                          <button type="button" class="btn btn-primary" id="modal-btn-no-${projeto.id}">Não</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </c:when>
                 <c:otherwise></c:otherwise>
               </c:choose>
             </td>
           </tr>
         </c:forEach>
-        </tbody>
-      </table>
+      </tbody>
+    </table>
   </div>
+</c:if>
+
 </div>
+
 <%@ include file="/WEB-INF/jsp/components/footer.jsp"%>

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -45,16 +46,24 @@ public class ProjetoController {
     public String cadastrarProjeto(Model model) {
         model.addAttribute("novoProjeto", new Projeto());
         model.addAttribute(LISTA_MEMBROS, service.listarMembros());
-        model.addAttribute("status", StatusEnum.values());
-        model.addAttribute("risco", RiscoEnum.values());
+        model.addAttribute("listarStatus", StatusEnum.values());
+        model.addAttribute("listarRiscos", RiscoEnum.values());
         return "/cadastrarProjeto";
     }
 
     @PostMapping("/salvarProjeto")
-    public String salvarProjeto(@Valid @ModelAttribute("novoProjeto") ProjetoDTO projetoDto) {
+    public String salvarProjeto(@Valid @ModelAttribute("novoProjeto") ProjetoDTO projetoDto, RedirectAttributes attributes) {
         Projeto projeto = new Projeto();
-        BeanUtils.copyProperties(projetoDto, projeto);
-        service.salvar(projeto);
+
+        try{
+            BeanUtils.copyProperties(projetoDto, projeto);
+            service.salvar(projeto);
+            attributes.addFlashAttribute("cadastrarProjeto", true);
+        }catch (Exception e) {
+            e.getMessage();
+            attributes.addFlashAttribute("cadastrarProjeto", false);
+        }
+
         return FWD_LISTA;
     }
 
@@ -73,7 +82,7 @@ public class ProjetoController {
     }
 
     @PostMapping("/editar/{id}")
-    public String alterarProjeto(@PathVariable("id") Long id, @ModelAttribute("objetoProjeto") @Valid ProjetoDTO projetoDto, BindingResult error) throws Exception {
+    public String alterarProjeto(@PathVariable("id") Long id, @ModelAttribute("objetoProjeto") @Valid ProjetoDTO projetoDto, BindingResult error, RedirectAttributes attributes) throws Exception {
 
         Projeto projeto = service.getProjetoById(id);
 
@@ -84,13 +93,15 @@ public class ProjetoController {
 
         BeanUtils.copyProperties(projetoDto, projeto);
         service.alterar(projeto);
+        attributes.addFlashAttribute("editarProjeto", true);
         return FWD_LISTA;
     }
 
     @GetMapping("/apagar/{id}")
-    public String apagarProjeto(@PathVariable("id") long id) {
+    public String apagarProjeto(@PathVariable("id") long id, RedirectAttributes attributes) {
         try {
             service.deleteProjetoId(id);
+            attributes.addFlashAttribute("excluirProjeto", true);
         } catch (Exception e) {
             e.getMessage();
         }

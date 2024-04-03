@@ -42,31 +42,31 @@
           <form:label path="status">Status</form:label>
           <form:select class="form-select" path="status" required="required">
             <form:option value="" label="Selecionar"/>
-            <form:options items="${status}" itemValue="name" itemLabel="label"/>
+            <form:options items="${listarSstatus}" itemValue="name" itemLabel="label"/>
           </form:select>
         </div>
         <div class="col">
           <form:label path="risco">Risco</form:label>
           <form:select class="form-select" path="risco" required="required">
             <form:option value="" label="Selecionar"/>
-            <form:options items="${risco}" itemValue="name" itemLabel="label"/>
+            <form:options items="${ListarRiscos}" itemValue="name" itemLabel="label"/>
           </form:select>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <form:label path="descricao">Descrição</form:label>
-          <form:input type="textarea" path="descricao" class="form-control"/>
+          <form:input type="textarea" path="descricao" class="form-control" required="required"/>
         </div>
       </div>
       <br>
       <div class="row">
-        <button class="btn btn-primary" onclick="confirmarEdicao()">Alterar</button>
-        <a class="btn btn-secondary" href="/projetos/listarProjetos">Voltar</a>
+        <button class="btn btn-primary" type="submit">Alterar</button>
+        <c:set value="/projetos/listarProjetos" var="linkVoltar"/>
+        <a class="btn btn-secondary" href="${linkVoltar}">Voltar</a>
       </div>
     </form:form>
   </div>
 </div>
 
-</div>
 <%@ include file="/WEB-INF/jsp/components/footer.jsp"%>

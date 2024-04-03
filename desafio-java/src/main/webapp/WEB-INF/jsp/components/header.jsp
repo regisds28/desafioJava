@@ -33,5 +33,20 @@
     </div>
   </div>
 </nav>
+<c:if test="${editarProjeto}">
+  <div class="alert alert-success alert-dismissible" id="alertEditar" style="display: block;">
+    <strong>Item alterado com sucesso!</strong>
+  </div>
+</c:if>
+<c:if test="${cadastrarProjeto}">
+  <div class="alert alert-success alert-dismissible" id="alertCadastrar" style="display: block;">
+    <strong>Item criado com sucesso!</strong>
+  </div>
+</c:if>
+<c:if test="${excluirProjeto}">
+  <div class="alert alert-success alert-dismissible" id="alertExcluir" style="display: block;">
+    <strong>Item excluído com sucesso!</strong>
+  </div>
+</c:if>
 </body>
 </html>

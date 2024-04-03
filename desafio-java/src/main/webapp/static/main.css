@@ -11,3 +11,18 @@ html{
 .header{
     margin: 1rem 0;
 }
+
+.alert{
+    position: fixed;
+    right: 2rem;
+}
+
+.noContent{
+    width: 100%;
+    background: #eee;
+    padding: 1rem 1.4rem;
+}
+
+.modal-title{
+    text-align: center;
+}
